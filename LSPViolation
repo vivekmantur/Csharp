@@ -1,0 +1,35 @@
+public class Employee
+{
+    public string Name { get; set; }
+    public virtual decimal CalculateSalary()
+    {
+        // For permanent employees, calculate salary normally
+        return 3000;  // Fixed base salary for example
+    }
+}
+
+public class PermanentEmployee : Employee
+{
+    // Inherits the salary calculation from Employee
+}
+
+public class Intern : Employee
+{
+    // Interns don't have a salary but receive a stipend instead
+    public override decimal CalculateSalary()
+    {
+        throw new NotImplementedException("Interns don't receive a salary");
+    }
+}
+public class Program
+{
+    public static void Main()
+    {
+        Employee emp = new PermanentEmployee();
+        Console.WriteLine($"Permanent Employee Salary: {emp.CalculateSalary()}");  // Output: 3000
+
+        // Now trying to use Intern in the same way as Employee
+        Employee intern = new Intern();
+        Console.WriteLine($"Intern Salary: {intern.CalculateSalary()}");  // This will throw an exception!
+    }
+}
