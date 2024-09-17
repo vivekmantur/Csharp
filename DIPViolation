@@ -1,20 +1,23 @@
-using System;
-namespace DIPDemo
+public class PaymentGateway
 {
-    public class CreditCard
+    public void ProcessPayment(decimal amount)
     {
-        public void ProcessPayment(decimal amount)
-        {
-            Console.WriteLine($"Processing credit card payment of {amount}");
-        }
+        Console.WriteLine($"Payment processed for ${amount}");
+    }
+}
+
+public class OrderProcessor
+{
+    private PaymentGateway _paymentGateway;
+
+    public OrderProcessor()
+    {
+        _paymentGateway = new PaymentGateway();
     }
 
-    public class PaymentProcessor
+    public void PlaceOrder(decimal totalAmount)
     {
-        public void ExecutePayment(decimal amount)
-        {
-            var creditCard = new CreditCard();
-            creditCard.ProcessPayment(amount);
-        }
+        Console.WriteLine("Order placed successfully!");
+        _paymentGateway.ProcessPayment(totalAmount);
     }
 }
